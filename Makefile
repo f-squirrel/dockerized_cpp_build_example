@@ -79,10 +79,10 @@ clean: ## Clean build directory
 login: ## Login to the container. Note: if the container is already running, login into existing one
 	@if [ "${IF_CONTAINER_RUNS}" != "true" ]; then \
 		docker run ${BASIC_RUN_PARAMS} \
-			${DOCKER_SHELL};exit 0; \
+			${DOCKER_SHELL}; \
 	else \
 		docker exec -it ${DOCKER_DEPS_CONTAINER} \
-			${DOCKER_SHELL};exit 0; \
+			${DOCKER_SHELL}; \
 	fi
 
 .PHONY: build-docker-deps-image
