@@ -9,6 +9,9 @@ DOCKER_DEPS_VERSION?=latest
 DOCKER_DEPS_CONTAINER?=${DOCKER_DEPS_IMAGE}
 DOCKER_DEPS_FILE?=DockerfileDeps
 
+DOCKER_PREPEND_MAKEFILES?=
+DOCKER_APPEND_MAKEFILES?=
+
 DOCKER_CMAKE_FLAGS?=
 
 
@@ -33,6 +36,8 @@ BASIC_RUN_PARAMS?=-it --init --rm --privileged=true \
 IF_CONTAINER_RUNS=$(shell docker container inspect -f '{{.State.Running}}' ${DOCKER_DEPS_CONTAINER} 2>/dev/null)
 
 .DEFAULT_GOAL:=build
+
+-include ${DOCKER_PREPEND_MAKEFILES}
 
 .PHONY: help
 help: ##
@@ -92,3 +97,5 @@ build-docker-deps-image: ## Build the deps image. Note: without caching
 	@echo "Before you push it to Docker Hub, please tag it(DOCKER_DEPS_VERSION + 1)."
 	@echo "If you want the image to be the default, please update the following variables:"
 	@echo "${CURDIR}/Makefile: DOCKER_DEPS_VERSION"
+
+-include ${DOCKER_APPEND_MAKEFILES}
