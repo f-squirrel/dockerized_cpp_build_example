@@ -1,0 +1,21 @@
+FROM ubuntu:18.04
+LABEL Description="Build environment"
+
+ENV HOME /root
+COPY ./install_deps.sh /install_deps.sh
+
+SHELL ["/bin/bash", "-c"]
+
+RUN echo $'path-exclude /usr/share/doc/* \n\
+path-exclude /usr/share/doc/*/copyright \n\
+path-exclude /usr/share/man/* \n\
+path-exclude /usr/share/groff/* \n\
+path-exclude /usr/share/info/* \n\
+path-exclude /usr/share/lintian/* \n\
+path-exclude /usr/share/linda/*' > /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+        $SHELL "/install_deps.sh" && \
+        apt-get clean && \
+        apt-get autoclean && \
+        rm -rf /install_deps
+
+ENV LC_ALL=C.UTF-8
