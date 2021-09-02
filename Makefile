@@ -16,6 +16,7 @@ DOCKER_CMAKE_FLAGS?=
 
 
 DOCKER_SHELL?="bash"
+LOCAL_SRC_PATH?=${CURDIR}
 DOCKER_SOURCE_PATH?=/${PROJECT_NAME}
 DOCKER_BUILD_DIR?="build"
 DOCKER_CTEST_TIMEOUT?="5000"
@@ -29,7 +30,7 @@ BASIC_RUN_PARAMS?=-it --init --rm --privileged=true \
 					  --cap-add NET_ADMIN --cap-add=SYS_PTRACE --ulimit core=-1 \
 					  --name="${DOCKER_DEPS_CONTAINER}" \
 					  --workdir=${DOCKER_SOURCE_PATH} \
-					  --mount type=bind,source=${CURDIR},target=${DOCKER_SOURCE_PATH} \
+					  --mount type=bind,source=${LOCAL_SRC_PATH},target=${DOCKER_SOURCE_PATH} \
 					  ${ADDITIONAL_RUN_PARAMS} \
 					  ${DOCKER_DEPS_REPO}${DOCKER_DEPS_IMAGE}:${DOCKER_DEPS_VERSION}
 
