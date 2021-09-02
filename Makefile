@@ -50,7 +50,6 @@ gen_cmake: ## Generate cmake files, used internally
 	@echo
 	@echo "CMake finished."
 
-
 .PHONY: build
 build: gen_cmake ## Build source. In order to build a specific target run: make TARGET=<target name>.
 	docker run ${BASIC_RUN_PARAMS} \
@@ -73,7 +72,6 @@ clean: ## Clean build directory
 	docker run ${BASIC_RUN_PARAMS} \
 		${DOCKER_SHELL} -c \
 		"rm -rf ${DOCKER_BUILD_DIR}"
-
 
 .PHONY: login
 login: ## Login to the container. Note: if the container is already running, login into existing one
