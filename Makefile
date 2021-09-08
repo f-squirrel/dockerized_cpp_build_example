@@ -2,8 +2,8 @@
 
 PROJECT_NAME=example
 
-DOCKER_CC=gcc
-DOCKER_CXX=g++
+DOCKER_CC?=gcc
+DOCKER_CXX?=g++
 
 include build_tools/Makefile
 
