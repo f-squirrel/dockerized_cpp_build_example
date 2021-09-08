@@ -6,3 +6,8 @@ DOCKER_CC=gcc
 DOCKER_CXX=g++
 
 include build_tools/Makefile
+
+# User-defined target
+.PHONY: example-target
+example-target: ## Example
+	@echo "This is an example target"
