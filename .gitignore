@@ -37,3 +37,5 @@
 
 # Build dir
 build/
+
+.cache/
