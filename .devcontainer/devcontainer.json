@@ -1,0 +1,19 @@
+{
+  "image": "example/example_build:latest",
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "twxs.cmake"
+      ]
+    }
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/example,type=bind",
+  "workspaceFolder": "/example",
+  "onCreateCommand": "apt update && apt install -y git && git config --global --add safe.directory /example"
+}
